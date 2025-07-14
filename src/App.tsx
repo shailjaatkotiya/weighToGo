@@ -1,20 +1,15 @@
-import { useState } from 'react';
-import { Container, Tabs, Tab, Box } from '@mui/material';
-import GetSomeSpace from './components/GetSomeSpace';
-import GiveSomeSpace from './components/GiveSomeSpace';
+import { Box } from '@mui/material';
+import Navbar from './components/Navbar';
+import LandingPage from './components/LandingPage';
 
-function App() {
-  const [tab, setTab] = useState(0);
+function App() {  
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Tabs value={tab} onChange={(_, v) => setTab(v)} centered>
-        <Tab label="Get Some Space" />
-        <Tab label="Give Some Space" />
-      </Tabs>
-      <Box mt={4}>
-        {tab === 0 ? <GetSomeSpace /> : <GiveSomeSpace />}
+    <Box sx={{ bgcolor: 'var(--black)', minHeight: '100vh' }}>
+      <Navbar />
+      <Box sx={{ pt: '64px' }}> {/* Add padding for fixed navbar */}
+        <LandingPage />
       </Box>
-    </Container>
+    </Box>
   );
 }
 
