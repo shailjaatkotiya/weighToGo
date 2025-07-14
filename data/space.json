@@ -1,0 +1,43 @@
+{
+  "offers": [
+    {
+      "id": 1,
+      "user": "Alice",
+      "availableKg": 20,
+      "pricePerKg": 200,
+      "flightType": "domestic",
+      "from": "BLR",
+      "to": "DEL",
+      "date": "2024-08-01"
+    }
+  ],
+  "requests": [
+    {
+      "id": 1,
+      "user": "Bob",
+      "requiredKg": 5,
+      "flightType": "domestic",
+      "from": "BLR",
+      "to": "DEL",
+      "date": "2024-08-01"
+    },
+    {
+      "id": 2,
+      "user": "Charlie",
+      "requiredKg": 5,
+      "flightType": "domestic",
+      "from": "BLR",
+      "to": "DEL",
+      "date": "2024-08-01"
+    },
+    {
+      "id": 3,
+      "user": "Dave",
+      "requiredKg": 5,
+      "flightType": "domestic",
+      "from": "BLR",
+      "to": "DEL",
+      "date": "2024-08-01"
+    }
+  ]
+} 
