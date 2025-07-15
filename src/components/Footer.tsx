@@ -34,14 +34,13 @@ const Footer = () => {
               alignItems: 'center',
               width: 32,
               height: 32,
-              bgcolor: 'var(--sgbus-green)',
               borderRadius: 1,
               fontSize: '0.875rem',
               fontWeight: 'bold',
               color: 'var(--black)'
             }}
           >
-            W2G
+            <img src="../assets/logo.png" alt="Weigh2Go" height={32} width={32}/>
           </Box>
           <Typography
             variant="h6"
