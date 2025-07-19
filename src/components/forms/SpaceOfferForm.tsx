@@ -89,7 +89,7 @@ export default function SpaceOfferForm() {
 
               {/* Offer-specific fields */}
               <Grid item xs={12}>
-                <Typography variant="h6" sx={{ color: colors.secondary, mb: 2 }}>
+                <Typography variant="h6" sx={{ color: colors.primary, mb: 2, opacity: 0.8 }}>
                   Space Details
                 </Typography>
               </Grid>

@@ -48,7 +48,7 @@ export default function SpaceRequestForm() {
   if (loading) {
     return (
       <Box sx={commonStyles.loadingCenter}>
-        <CircularProgress sx={{ color: colors.secondary }} />
+        <CircularProgress sx={{ color: colors.primary }} />
       </Box>
     );
   }
@@ -57,7 +57,7 @@ export default function SpaceRequestForm() {
     <Box sx={commonStyles.formContainer}>
       <Typography variant="h4" sx={{
         ...commonStyles.pageTitle,
-        color: colors.secondary,
+        color: colors.primary,
       }}>
         Request Luggage Space
       </Typography>
@@ -75,7 +75,7 @@ export default function SpaceRequestForm() {
               <PersonalDetailsFields
                 formData={formData}
                 onChange={handleInputChange}
-                sectionColor={colors.secondary}
+                sectionColor={colors.primary}
               />
 
               <FlightSelectionField
@@ -84,12 +84,12 @@ export default function SpaceRequestForm() {
                 selectedFlight={selectedFlight}
                 onChange={handleInputChange}
                 formatDuration={formatDuration}
-                sectionColor={colors.secondary}
+                sectionColor={colors.primary}
               />
 
               {/* Request-specific fields */}
               <Grid item xs={12}>
-                <Typography variant="h6" sx={{ color: colors.secondary, mb: 2 }}>
+                <Typography variant="h6" sx={{ color: colors.primary, mb: 2, opacity: 0.8 }}>
                   Request Details
                 </Typography>
               </Grid>

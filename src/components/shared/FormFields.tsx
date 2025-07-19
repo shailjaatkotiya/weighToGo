@@ -101,7 +101,7 @@ export const FlightSelectionField = ({
 }: FlightSelectionFieldProps) => (
   <>
     <Grid item xs={12}>
-      <Divider sx={getDividerStyle('secondary')} />
+      <Divider sx={getDividerStyle('primary')} />
       <Typography variant="h6" sx={{ color: sectionColor, mb: 2 }}>
         Flight Details
       </Typography>
@@ -130,12 +130,12 @@ export const FlightSelectionField = ({
       <Grid item xs={12}>
         <Box sx={{ 
           p: 2, 
-          bgcolor: 'rgba(132, 218, 93, 0.05)',
+          bgcolor: 'rgba(0, 212, 170, 0.05)',
           borderRadius: 1,
-          border: '1px solid var(--sgbus-green)',
+          border: '1px solid var(--primary)',
           borderOpacity: 0.3
         }}>
-          <Typography variant="h6" sx={{ color: 'var(--sgbus-green)', mb: 2 }}>
+          <Typography variant="h6" sx={{ color: 'var(--primary)', mb: 2 }}>
             Flight Information
           </Typography>
           <Grid container spacing={2}>
@@ -232,7 +232,7 @@ export const SubmitButton = ({ submitting, children }: SubmitButtonProps) => (
       >
         {submitting ? (
           <>
-            <CircularProgress size={20} sx={{ mr: 1, color: 'var(--black)' }} />
+            <CircularProgress size={20} sx={{ mr: 1, color: 'var(--background)' }} />
             Submitting...
           </>
         ) : (

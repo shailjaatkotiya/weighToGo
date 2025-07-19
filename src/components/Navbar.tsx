@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AppBar, Toolbar, Typography, Box, Button, Menu, MenuItem, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import type { AppSection } from '../App';
+import type { AppSection } from '../types';
 
 interface NavbarProps {
   currentSection: AppSection;
@@ -68,7 +68,7 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
           <Typography
             variant="h5"
             sx={{
-              color: 'var(--sgbus-green)',
+              color: 'var(--primary)',
               fontWeight: 'bold'
             }}
           >
@@ -91,11 +91,11 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
               onClick={() => handleNavigation(item.section)}
               sx={{ 
                 fontWeight: 500,
-                color: currentSection === item.section ? 'var(--sgbus-green)' : 'var(--tea-green)',
-                borderBottom: currentSection === item.section ? '2px solid var(--sgbus-green)' : 'none',
+                color: currentSection === item.section ? 'var(--primary)' : 'var(--text)',
+                borderBottom: currentSection === item.section ? '2px solid var(--primary)' : 'none',
                 borderRadius: 0,
                 '&:hover': {
-                  color: 'var(--sgbus-green)'
+                  color: 'var(--primary)'
                 }
               }}
             >
@@ -111,11 +111,12 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
             <Button
               variant="outlined"
               sx={{
-                color: 'var(--mint)',
-                borderColor: 'var(--mint)',
+                color: 'var(--primary)',
+                borderColor: 'var(--primary)',
                 '&:hover': {
-                  borderColor: 'var(--sgbus-green)',
-                  color: 'var(--sgbus-green)'
+                  borderColor: 'var(--primary)',
+                  color: 'var(--primary)',
+                  opacity: 0.8
                 }
               }}
             >
@@ -127,7 +128,7 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
           <IconButton
             sx={{ 
               display: { xs: 'flex', lg: 'none' },
-              color: 'var(--tea-green)'
+              color: 'var(--text)'
             }}
             onClick={handleClick}
           >
@@ -141,8 +142,8 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
             onClose={handleClose}
             sx={{
               '& .MuiPaper-root': {
-                bgcolor: 'var(--black)',
-                border: '1px solid var(--sgbus-green)',
+                bgcolor: 'var(--background)',
+                border: '1px solid var(--primary)',
                 borderRadius: 2,
                 mt: 1,
                 minWidth: 200
@@ -154,11 +155,11 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
                 key={item.section}
                 onClick={() => handleNavigation(item.section)}
                 sx={{
-                  color: currentSection === item.section ? 'var(--sgbus-green)' : 'var(--tea-green)',
-                  bgcolor: currentSection === item.section ? 'rgba(132, 218, 93, 0.1)' : 'transparent',
+                  color: currentSection === item.section ? 'var(--primary)' : 'var(--text)',
+                  bgcolor: currentSection === item.section ? 'rgba(0, 212, 170, 0.1)' : 'transparent',
                   '&:hover': {
-                    bgcolor: 'rgba(132, 218, 93, 0.2)',
-                    color: 'var(--sgbus-green)'
+                    bgcolor: 'rgba(0, 212, 170, 0.2)',
+                    color: 'var(--primary)'
                   }
                 }}
               >
@@ -167,8 +168,8 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
             ))}
             <MenuItem 
               sx={{ 
-                color: 'var(--mint)',
-                borderTop: '1px solid var(--mint)',
+                color: 'var(--primary)',
+                borderTop: '1px solid var(--primary)',
                 mt: 1
               }}
             >

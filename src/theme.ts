@@ -4,20 +4,20 @@ const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#84DA5D',
-      contrastText: '#ffffff',
+      main: '#00D4AA',
+      contrastText: '#0A0A0A',
     },
     secondary: {
-      main: '#45B77B',
-      contrastText: '#ffffff',
+      main: '#00D4AA',
+      contrastText: '#0A0A0A',
     },
     background: {
-      default: '#010101',
-      paper: '#161616',
+      default: '#0A0A0A',
+      paper: '#1A1A1A',
     },
     text: {
-      primary: '#ffffff',
-      secondary: '#E3FFCC',
+      primary: '#E8F5E8',
+      secondary: '#E8F5E8',
     },
   },
   typography: {

@@ -8,15 +8,7 @@ import FlightsList from './components/FlightsList';
 import UsersList from './components/UsersList';
 import GiveSomeSpace from './components/GiveSomeSpace';
 import GetSomeSpace from './components/GetSomeSpace';
-
-export type AppSection = 
-  | 'home'
-  | 'dashboard'
-  | 'manage-space'
-  | 'find-space'
-  | 'offer-space'
-  | 'flights'
-  | 'users';
+import type { AppSection } from './types';
 
 function App() {  
   const [currentSection, setCurrentSection] = useState<AppSection>('home');
@@ -47,7 +39,7 @@ function App() {
   };
 
   return (
-    <Box sx={{ bgcolor: 'var(--black)', minHeight: '100vh' }}>
+    <Box sx={{ bgcolor: 'var(--background)', minHeight: '100vh' }}>
       <Navbar 
         currentSection={currentSection}
         onNavigate={handleNavigation}

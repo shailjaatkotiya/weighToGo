@@ -2,10 +2,9 @@ import type { SxProps, Theme } from '@mui/material/styles';
 
 // Common color constants from CSS variables
 export const colors = {
-  primary: 'var(--sgbus-green)',
-  secondary: 'var(--mint)',
-  background: 'var(--black)',
-  textPrimary: 'var(--tea-green)',
+  primary: 'var(--primary)',
+  background: 'var(--background)',
+  text: 'var(--text)',
 } as const;
 
 // Common spacing and layout styles
@@ -52,28 +51,29 @@ export const commonStyles = {
   } as SxProps<Theme>,
 
   subtitle: {
-    color: colors.textPrimary,
+    color: colors.text,
     mb: 4,
     textAlign: 'center',
   } as SxProps<Theme>,
 
   bodyText: {
-    color: colors.textPrimary,
+    color: colors.text,
   } as SxProps<Theme>,
 
   // Card styles
   primaryCard: {
-    bgcolor: 'rgba(132, 218, 93, 0.1)',
+    bgcolor: 'rgba(0, 212, 170, 0.1)',
     border: '1px solid',
     borderColor: colors.primary,
     borderRadius: 2,
   } as SxProps<Theme>,
 
   secondaryCard: {
-    bgcolor: 'rgba(69, 183, 123, 0.1)',
+    bgcolor: 'rgba(0, 212, 170, 0.05)',
     border: '1px solid',
-    borderColor: colors.secondary,
+    borderColor: colors.primary,
     borderRadius: 2,
+    opacity: 0.8,
   } as SxProps<Theme>,
 
   // Layout helpers
@@ -97,12 +97,12 @@ export const commonStyles = {
   // Form field styles
   textField: {
     '& .MuiOutlinedInput-root': {
-      '& fieldset': { borderColor: colors.secondary },
+      '& fieldset': { borderColor: colors.primary },
       '&:hover fieldset': { borderColor: colors.primary },
       '&.Mui-focused fieldset': { borderColor: colors.primary },
     },
-    '& .MuiInputLabel-root': { color: colors.textPrimary },
-    '& .MuiInputBase-input': { color: colors.textPrimary },
+    '& .MuiInputLabel-root': { color: colors.text },
+    '& .MuiInputBase-input': { color: colors.text },
   } as SxProps<Theme>,
 
   // Button styles
@@ -117,11 +117,12 @@ export const commonStyles = {
   } as SxProps<Theme>,
 
   secondaryButton: {
-    border: `1px solid ${colors.secondary}`,
-    color: colors.secondary,
+    border: `1px solid ${colors.primary}`,
+    color: colors.primary,
     '&:hover': {
       borderColor: colors.primary,
       color: colors.primary,
+      opacity: 0.8,
     },
   } as SxProps<Theme>,
 
@@ -133,19 +134,20 @@ export const commonStyles = {
   } as SxProps<Theme>,
 
   infoChip: {
-    bgcolor: colors.secondary,
+    bgcolor: colors.primary,
     color: colors.background,
     fontWeight: 'bold',
+    opacity: 0.8,
   } as SxProps<Theme>,
 } as const;
 
 // Utility functions for dynamic styles
 export const getLoadingSpinnerColor = (variant: 'primary' | 'secondary' = 'primary') => ({
-  color: variant === 'primary' ? colors.primary : colors.secondary,
+  color: colors.primary,
 });
 
-export const getDividerStyle = (color: 'primary' | 'secondary' = 'secondary') => ({
-  borderColor: color === 'primary' ? colors.primary : colors.secondary,
+export const getDividerStyle = (color: 'primary' | 'secondary' = 'primary') => ({
+  borderColor: colors.primary,
   my: 2,
 });
 

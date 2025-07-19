@@ -37,7 +37,7 @@ const CTA = () => {
             mb: 3,
             fontWeight: 'bold',
             fontSize: { xs: '2.5rem', sm: '3rem' },
-            color: 'var(--sgbus-green)'
+            color: 'var(--primary)'
           }}
         >
           Ready to Start Sharing?
@@ -46,7 +46,7 @@ const CTA = () => {
           variant="h5"
           sx={{
             mb: 5,
-            color: 'var(--tea-green)',
+            color: 'var(--text)',
             lineHeight: 1.6
           }}
         >

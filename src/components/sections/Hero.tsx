@@ -1,5 +1,5 @@
 import { Box, Typography, Button, Grid } from '@mui/material';
-import type { AppSection } from '../../App';
+import type { AppSection } from '../../types';
 
 interface HeroProps {
   onNavigate?: (section: AppSection) => void;
@@ -60,16 +60,16 @@ const Hero = ({ onNavigate }: HeroProps) => {
           <Box component="div">Share Luggage Space,</Box>
           <Box component="div" sx={{ mt: 2 }}>Save Money & Travel Light</Box>
         </Typography>
-        <Typography
-          sx={{
-            fontSize: { xs: '1.125rem', sm: '1.25rem' },
-            lineHeight: 1.7,
-            color: 'var(--tea-green)',
-            maxWidth: '750px',
-            mx: 'auto',
-            mb: 3
-          }}
-        >
+                  <Typography
+            sx={{
+              fontSize: { xs: '1.125rem', sm: '1.25rem' },
+              lineHeight: 1.7,
+              color: 'var(--text)',
+              maxWidth: '750px',
+              mx: 'auto',
+              mb: 3
+            }}
+          >
           Connect with fellow travelers to share unused luggage space. Earn
           money by offering your extra space or save on shipping by using
           others.
@@ -81,7 +81,7 @@ const Hero = ({ onNavigate }: HeroProps) => {
             <Typography
               variant="h5"
               sx={{
-                color: 'var(--sgbus-green)',
+                color: 'var(--primary)',
                 mb: 4,
                 fontWeight: 'bold'
               }}
@@ -96,13 +96,14 @@ const Hero = ({ onNavigate }: HeroProps) => {
                   fullWidth
                   onClick={() => handleNavigation('dashboard')}
                   sx={{
-                    bgcolor: 'var(--sgbus-green)',
-                    color: 'var(--black)',
+                    bgcolor: 'var(--primary)',
+                    color: 'var(--background)',
                     py: 2,
                     fontWeight: 'bold',
                     fontSize: '1rem',
                     '&:hover': {
-                      bgcolor: 'var(--mint)'
+                      bgcolor: 'var(--primary)',
+                      opacity: 0.8
                     }
                   }}
                 >
@@ -116,13 +117,14 @@ const Hero = ({ onNavigate }: HeroProps) => {
                   fullWidth
                   onClick={() => handleNavigation('manage-space')}
                   sx={{
-                    bgcolor: 'var(--sgbus-green)',
-                    color: 'var(--black)',
+                    bgcolor: 'var(--primary)',
+                    color: 'var(--background)',
                     py: 2,
                     fontWeight: 'bold',
                     fontSize: '1rem',
                     '&:hover': {
-                      bgcolor: 'var(--mint)'
+                      bgcolor: 'var(--primary)',
+                      opacity: 0.8
                     }
                   }}
                 >
@@ -136,13 +138,14 @@ const Hero = ({ onNavigate }: HeroProps) => {
                   fullWidth
                   onClick={() => handleNavigation('find-space')}
                   sx={{
-                    bgcolor: 'var(--sgbus-green)',
-                    color: 'var(--black)',
+                    bgcolor: 'var(--primary)',
+                    color: 'var(--background)',
                     py: 2,
                     fontWeight: 'bold',
                     fontSize: '1rem',
                     '&:hover': {
-                      bgcolor: 'var(--mint)'
+                      bgcolor: 'var(--primary)',
+                      opacity: 0.8
                     }
                   }}
                 >
@@ -156,13 +159,14 @@ const Hero = ({ onNavigate }: HeroProps) => {
                   fullWidth
                   onClick={() => handleNavigation('offer-space')}
                   sx={{
-                    bgcolor: 'var(--sgbus-green)',
-                    color: 'var(--black)',
+                    bgcolor: 'var(--primary)',
+                    color: 'var(--background)',
                     py: 2,
                     fontWeight: 'bold',
                     fontSize: '1rem',
                     '&:hover': {
-                      bgcolor: 'var(--mint)'
+                      bgcolor: 'var(--primary)',
+                      opacity: 0.8
                     }
                   }}
                 >
@@ -174,7 +178,7 @@ const Hero = ({ onNavigate }: HeroProps) => {
             <Box sx={{ mt: 4 }}>
               <Typography
                 sx={{
-                  color: 'var(--tea-green)',
+                  color: 'var(--text)',
                   fontSize: '1rem',
                   mb: 3
                 }}
@@ -187,10 +191,10 @@ const Hero = ({ onNavigate }: HeroProps) => {
                   variant="text"
                   onClick={() => handleNavigation('flights')}
                   sx={{
-                    color: 'var(--tea-green)',
+                    color: 'var(--text)',
                     fontWeight: 'bold',
                     '&:hover': {
-                      color: 'var(--sgbus-green)'
+                      color: 'var(--primary)'
                     }
                   }}
                 >
@@ -200,10 +204,10 @@ const Hero = ({ onNavigate }: HeroProps) => {
                   variant="text"
                   onClick={() => handleNavigation('users')}
                   sx={{
-                    color: 'var(--tea-green)',
+                    color: 'var(--text)',
                     fontWeight: 'bold',
                     '&:hover': {
-                      color: 'var(--mint)'
+                      color: 'var(--primary)'
                     }
                   }}
                 >
