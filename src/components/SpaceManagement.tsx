@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Tabs, Tab, Typography } from '@mui/material';
+import { Box, Tabs, Tab, Typography, useTheme, useMediaQuery } from '@mui/material';
 import SpaceOfferForm from './SpaceOfferForm';
 import SpaceRequestForm from './SpaceRequestForm';
 
@@ -38,40 +38,72 @@ function a11yProps(index: number) {
 
 export default function SpaceManagement() {
   const [value, setValue] = useState(0);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'var(--black)', py: 4 }}>
-      <Box sx={{ maxWidth: 1200, mx: 'auto', px: 3 }}>
-        <Typography variant="h3" sx={{ 
-          color: 'var(--sgbus-green)',
-          mb: 4,
-          textAlign: 'center',
-          fontWeight: 'bold'
-        }}>
+    <Box sx={{ 
+      minHeight: '100vh', 
+      bgcolor: 'var(--black)', 
+      py: { xs: 3, sm: 4, md: 5 }
+    }}>
+      <Box sx={{ 
+        maxWidth: 1200, 
+        mx: 'auto', 
+        px: { xs: 2, sm: 3 }
+      }}>
+        <Typography 
+          variant="h3" 
+          sx={{ 
+            color: 'var(--sgbus-green)',
+            mb: { xs: 2, sm: 3, md: 4 },
+            textAlign: 'center',
+            fontWeight: 'bold',
+            fontSize: {
+              xs: 'clamp(1.5rem, 6vw, 2rem)',
+              sm: 'clamp(2rem, 5vw, 2.5rem)',
+              md: 'clamp(2.5rem, 4vw, 3rem)'
+            }
+          }}
+        >
           Luggage Space Management
         </Typography>
 
-        <Typography variant="h6" sx={{ 
-          color: 'var(--tea-green)',
-          mb: 4,
-          textAlign: 'center',
-          maxWidth: 600,
-          mx: 'auto'
-        }}>
+        <Typography 
+          variant="h6" 
+          sx={{ 
+            color: 'var(--tea-green)',
+            mb: { xs: 3, sm: 4 },
+            textAlign: 'center',
+            maxWidth: 600,
+            mx: 'auto',
+            fontSize: {
+              xs: 'clamp(0.875rem, 3vw, 1rem)',
+              sm: 'clamp(1rem, 2.5vw, 1.125rem)',
+              md: 'clamp(1.125rem, 2vw, 1.25rem)'
+            },
+            px: { xs: 1, sm: 0 }
+          }}
+        >
           Share your extra luggage space or find someone to carry your items. 
           Connect with fellow travelers on the same flight.
         </Typography>
 
-        <Box sx={{ borderBottom: 1, borderColor: 'var(--mint)', mb: 4 }}>
+        <Box sx={{ 
+          borderBottom: 1, 
+          borderColor: 'var(--mint)', 
+          mb: { xs: 3, sm: 4 }
+        }}>
           <Tabs 
             value={value} 
             onChange={handleChange} 
             aria-label="space management tabs"
             centered
+            variant={isMobile ? "fullWidth" : "standard"}
             sx={{
               '& .MuiTabs-indicator': {
                 backgroundColor: 'var(--sgbus-green)',
@@ -79,9 +111,12 @@ export default function SpaceManagement() {
               },
               '& .MuiTab-root': {
                 color: 'var(--tea-green)',
-                fontSize: '1.1rem',
+                fontSize: {
+                  xs: 'clamp(0.875rem, 3vw, 1rem)',
+                  sm: 'clamp(1rem, 2.5vw, 1.1rem)'
+                },
                 fontWeight: 'bold',
-                minWidth: 200,
+                minWidth: isMobile ? 'auto' : 200,
                 '&.Mui-selected': {
                   color: 'var(--sgbus-green)'
                 },

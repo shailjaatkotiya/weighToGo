@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Paper } from '@mui/material';
+import { Box, Typography, Grid, Paper, useTheme, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 interface FeatureCardProps {
@@ -9,13 +9,23 @@ interface FeatureCardProps {
 }
 
 const FeatureCard = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(5),
+  padding: theme.spacing(3, 2),
   textAlign: 'center',
   background: 'rgba(1, 1, 1, 0.8)',
   border: '1px solid',
   borderRadius: theme.spacing(2),
   position: 'relative',
   overflow: 'hidden',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(4, 3),
+  },
+  [theme.breakpoints.up('md')]: {
+    padding: theme.spacing(5),
+  },
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -29,26 +39,50 @@ const FeatureCard = styled(Paper)(({ theme }) => ({
 
 const FeatureItem = ({ emoji, title, description, borderColor }: FeatureCardProps) => (
   <FeatureCard sx={{ borderColor: `${borderColor}20` }}>
-    <Typography variant="h2" sx={{ mb: 2.5, fontSize: '3rem' }}>
+    <Typography 
+      variant="h2" 
+      sx={{ 
+        mb: { xs: 1.5, sm: 2, md: 2.5 }, 
+        fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
+      }}
+    >
       {emoji}
     </Typography>
     <Typography 
       variant="h5" 
       sx={{ 
-        mb: 2, 
+        mb: { xs: 1, sm: 1.5, md: 2 }, 
         color: borderColor,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: {
+          xs: 'clamp(1rem, 4vw, 1.25rem)',
+          sm: 'clamp(1.125rem, 3vw, 1.5rem)',
+          md: 'clamp(1.25rem, 2.5vw, 1.75rem)'
+        }
       }}
     >
       {title}
     </Typography>
-    <Typography sx={{ color: 'var(--tea-green)' }}>
+    <Typography 
+      sx={{ 
+        color: 'var(--tea-green)',
+        fontSize: {
+          xs: 'clamp(0.75rem, 2.5vw, 0.875rem)',
+          sm: 'clamp(0.875rem, 2vw, 1rem)',
+          md: 'clamp(1rem, 1.5vw, 1.125rem)'
+        },
+        lineHeight: 1.6
+      }}
+    >
       {description}
     </Typography>
   </FeatureCard>
 );
 
 const Features = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   const features = [
     {
       emoji: '💰',
@@ -94,8 +128,8 @@ const Features = () => {
       id="features"
       sx={{
         position: 'relative',
-        px: 3,
-        py: 10,
+        px: { xs: 2, sm: 3 },
+        py: { xs: 6, sm: 8, md: 10 },
         overflow: 'hidden',
         '&::before': {
           content: '""',
@@ -120,17 +154,21 @@ const Features = () => {
         <Typography
           variant="h2"
           sx={{
-            mb: 8,
+            mb: { xs: 4, sm: 6, md: 8 },
             textAlign: 'center',
             color: 'var(--sgbus-green)',
             fontWeight: 'bold',
-            fontSize: { xs: '2.5rem', sm: '3rem' }
+            fontSize: {
+              xs: 'clamp(1.5rem, 6vw, 2.5rem)',
+              sm: 'clamp(2rem, 5vw, 3rem)',
+              md: 'clamp(2.5rem, 4vw, 3.5rem)'
+            }
           }}
         >
           Why Choose Weigh2Go?
         </Typography>
         
-        <Grid container spacing={4}>
+        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
           {features.map((feature, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <FeatureItem {...feature} />

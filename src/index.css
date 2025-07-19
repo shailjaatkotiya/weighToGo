@@ -26,15 +26,16 @@ a:hover {
 
 body {
   margin: 0;
-  min-width: 90vw;
+  min-width: 100vw;
   min-height: 100vh;
   background: var(--background);
   color: var(--text);
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: clamp(2rem, 5vw, 3.2em);
   line-height: 1.1;
 }
 
@@ -55,6 +56,32 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+  }
+  
+  button {
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+  
+  h1 {
+    font-size: clamp(1.25rem, 10vw, 2rem);
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -80,4 +107,25 @@ button:focus-visible {
 .reveal.visible {
   opacity: 1;
   transform: none;
+}
+
+/* Mobile touch improvements */
+@media (max-width: 768px) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Improve touch targets */
+  .MuiButton-root {
+    min-height: 44px;
+  }
+  
+  .MuiIconButton-root {
+    min-width: 44px;
+    min-height: 44px;
+  }
 }

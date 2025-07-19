@@ -1,13 +1,16 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, useTheme, useMediaQuery } from '@mui/material';
 
 const CTA = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <Box
       component="section"
       sx={{
         position: 'relative',
-        px: 3,
-        py: 10,
+        px: { xs: 2, sm: 3 },
+        py: { xs: 6, sm: 8, md: 10 },
         textAlign: 'center',
         bgcolor: 'var(--background)',
         overflow: 'hidden',
@@ -34,9 +37,13 @@ const CTA = () => {
         <Typography
           variant="h2"
           sx={{
-            mb: 3,
+            mb: { xs: 2, sm: 3 },
             fontWeight: 'bold',
-            fontSize: { xs: '2.5rem', sm: '3rem' },
+            fontSize: {
+              xs: 'clamp(1.5rem, 6vw, 2.5rem)',
+              sm: 'clamp(2rem, 5vw, 3rem)',
+              md: 'clamp(2.5rem, 4vw, 3.5rem)'
+            },
             color: 'var(--primary)'
           }}
         >
@@ -45,9 +52,15 @@ const CTA = () => {
         <Typography
           variant="h5"
           sx={{
-            mb: 5,
+            mb: { xs: 3, sm: 4, md: 5 },
             color: 'var(--text)',
-            lineHeight: 1.6
+            lineHeight: 1.6,
+            fontSize: {
+              xs: 'clamp(0.875rem, 3vw, 1rem)',
+              sm: 'clamp(1rem, 2.5vw, 1.125rem)',
+              md: 'clamp(1.125rem, 2vw, 1.25rem)'
+            },
+            px: { xs: 1, sm: 0 }
           }}
         >
           Join thousands of travelers who are already saving money and earning
@@ -56,23 +69,25 @@ const CTA = () => {
         <Box
           sx={{
             display: 'flex',
-            gap: 2,
+            gap: { xs: 1.5, sm: 2 },
             justifyContent: 'center',
             flexDirection: { xs: 'column', sm: 'row' },
-            alignItems: 'center'
+            alignItems: 'center',
+            px: { xs: 1, sm: 0 }
           }}
         >
           <Button
             variant="contained"
             size="large"
             sx={{
-              px: 4,
-              py: 2,
-              fontSize: '1.125rem',
+              px: { xs: 3, sm: 4 },
+              py: { xs: 1.5, sm: 2 },
+              fontSize: { xs: '0.875rem', sm: '1rem', md: '1.125rem' },
               fontWeight: 600,
               bgcolor: 'var(--primary)',
               color: 'var(--background)',
               border: 'none',
+              minHeight: { xs: '48px', sm: '56px' },
               '&:hover': {
                 bgcolor: 'var(--primary)',
                 opacity: 0.8
@@ -85,13 +100,14 @@ const CTA = () => {
             variant="outlined"
             size="large"
             sx={{
-              px: 4,
-              py: 2,
-              fontSize: '1.125rem',
+              px: { xs: 3, sm: 4 },
+              py: { xs: 1.5, sm: 2 },
+              fontSize: { xs: '0.875rem', sm: '1rem', md: '1.125rem' },
               fontWeight: 600,
               color: 'var(--primary)',
               borderColor: 'var(--primary)',
               borderWidth: 2,
+              minHeight: { xs: '48px', sm: '56px' },
               '&:hover': {
                 borderColor: 'var(--primary)',
                 color: 'var(--primary)',

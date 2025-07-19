@@ -14,7 +14,9 @@ import {
   AccordionSummary,
   AccordionDetails,
   Stack,
-  Paper
+  Paper,
+  useTheme,
+  useMediaQuery
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -61,6 +63,8 @@ export default function FlightDashboard() {
   const [userFlights, setUserFlights] = useState<FlightInfo[]>([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {
     fetchUserFlights();
@@ -70,7 +74,7 @@ export default function FlightDashboard() {
     try {
       const response = await fetch('/space.json');
       const data = await response.json();
-      
+
       if (!data.currentUser) {
         setLoading(false);
         return;
@@ -86,7 +90,7 @@ export default function FlightDashboard() {
 
       const flightInfos = userPassengers.map((userPassenger: FlightPassenger) => {
         const flight = data.flights.find((f: Flight) => f.flightId === userPassenger.flightId);
-        
+
         // Get all passengers on this flight
         const flightPassengers = data.flightPassengers
           .filter((p: FlightPassenger) => p.flightId === userPassenger.flightId)
@@ -94,14 +98,14 @@ export default function FlightDashboard() {
             passenger,
             user: data.users.find((u: User) => u.userId === passenger.userId)
           }))
-          .filter(p => p.user);
+          .filter((p: any) => p.user);
 
         return {
           flight,
           passengers: flightPassengers,
           currentUserPassenger: userPassenger
         };
-      }).filter(info => info.flight);
+      }).filter((info: any) => info.flight);
 
       setUserFlights(flightInfos);
       setLoading(false);
@@ -135,8 +139,17 @@ export default function FlightDashboard() {
 
   if (!currentUser) {
     return (
-      <Box sx={{ textAlign: 'center', py: 8 }}>
-        <Typography variant="h5" sx={{ color: 'var(--tea-green)' }}>
+      <Box sx={{ textAlign: 'center', py: { xs: 4, sm: 6, md: 8 } }}>
+        <Typography
+          variant="h5"
+          sx={{
+            color: 'var(--tea-green)',
+            fontSize: {
+              xs: 'clamp(1rem, 4vw, 1.25rem)',
+              sm: 'clamp(1.25rem, 3vw, 1.5rem)'
+            }
+          }}
+        >
           Please log in to view your flight dashboard
         </Typography>
       </Box>
@@ -144,108 +157,199 @@ export default function FlightDashboard() {
   }
 
   return (
-    <Box sx={{ maxWidth: 1200, mx: 'auto', p: 3 }}>
-      <Typography variant="h4" sx={{ 
-        color: 'var(--sgbus-green)',
-        mb: 2,
-        textAlign: 'center',
-        fontWeight: 'bold'
-      }}>
+    <Box sx={{
+      maxWidth: 1200,
+      mx: 'auto',
+      p: { xs: 2, sm: 3 }
+    }}>
+      <Typography
+        variant="h4"
+        sx={{
+          color: 'var(--sgbus-green)',
+          mb: { xs: 1.5, sm: 2 },
+          textAlign: 'center',
+          fontWeight: 'bold',
+          fontSize: {
+            xs: 'clamp(1.5rem, 6vw, 2rem)',
+            sm: 'clamp(2rem, 5vw, 2.5rem)',
+            md: 'clamp(2.5rem, 4vw, 3rem)'
+          }
+        }}
+      >
         My Flight Dashboard
       </Typography>
 
-      <Typography variant="h6" sx={{ 
-        color: 'var(--tea-green)',
-        mb: 4,
-        textAlign: 'center'
-      }}>
+      <Typography
+        variant="h6"
+        sx={{
+          color: 'var(--tea-green)',
+          mb: { xs: 3, sm: 4 },
+          textAlign: 'center',
+          fontSize: {
+            xs: 'clamp(0.875rem, 3vw, 1rem)',
+            sm: 'clamp(1rem, 2.5vw, 1.125rem)',
+            md: 'clamp(1.125rem, 2vw, 1.25rem)'
+          }
+        }}
+      >
         Welcome back, {currentUser.name}!
       </Typography>
 
       {userFlights.length === 0 ? (
-        <Paper elevation={2} sx={{ 
+        <Paper elevation={2} sx={{
           bgcolor: 'rgba(132, 218, 93, 0.1)',
           border: '1px solid var(--sgbus-green)',
-          p: 4,
+          p: { xs: 3, sm: 4 },
           textAlign: 'center',
           borderRadius: 3
         }}>
-          <Typography sx={{ color: 'var(--tea-green)', fontSize: '1.1rem' }}>
+          <Typography sx={{
+            color: 'var(--tea-green)',
+            fontSize: {
+              xs: 'clamp(0.875rem, 3vw, 1rem)',
+              sm: 'clamp(1rem, 2.5vw, 1.1rem)'
+            }
+          }}>
             You don't have any flights registered yet.
           </Typography>
         </Paper>
       ) : (
-        <Stack spacing={4}>
+        <Stack spacing={{ xs: 3, sm: 4 }}>
           {userFlights.map((flightInfo) => (
-            <Card key={flightInfo.flight.flightId} elevation={3} sx={{ 
+            <Card key={flightInfo.flight.flightId} elevation={3} sx={{
               bgcolor: 'rgba(132, 218, 93, 0.1)',
               border: '1px solid var(--sgbus-green)',
               borderRadius: 3,
               overflow: 'hidden'
             }}>
-              <CardContent sx={{ p: 3 }}>
+              <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
                 {/* Flight Header */}
-                <Box sx={{ mb: 3 }}>
-                  <Box sx={{ 
-                    display: 'flex', 
-                    justifyContent: 'space-between', 
-                    alignItems: 'center', 
-                    mb: 3 
+                <Box sx={{ mb: { xs: 2, sm: 3 } }}>
+                  <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    mb: { xs: 2, sm: 3 },
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    gap: { xs: 1, sm: 0 }
                   }}>
-                    <Typography variant="h4" sx={{ 
-                      color: 'var(--sgbus-green)', 
-                      fontWeight: 'bold' 
-                    }}>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        color: 'var(--sgbus-green)',
+                        fontWeight: 'bold',
+                        fontSize: {
+                          xs: 'clamp(1.25rem, 5vw, 1.75rem)',
+                          sm: 'clamp(1.5rem, 4vw, 2rem)',
+                          md: 'clamp(2rem, 3vw, 2.25rem)'
+                        }
+                      }}
+                    >
                       {flightInfo.flight.flightNumber}
                     </Typography>
-                    <Chip 
-                      label={flightInfo.currentUserPassenger ? 
+                    <Chip
+                      label={flightInfo.currentUserPassenger ?
                         getSpaceTypeLabel(flightInfo.currentUserPassenger.spaceType, flightInfo.currentUserPassenger.weightKg) :
                         'Passenger'
                       }
-                      sx={{ 
-                        bgcolor: flightInfo.currentUserPassenger ? 
-                          getSpaceTypeColor(flightInfo.currentUserPassenger.spaceType) : 
-                          'var(--tea-green)', 
+                      sx={{
+                        bgcolor: flightInfo.currentUserPassenger ?
+                          getSpaceTypeColor(flightInfo.currentUserPassenger.spaceType) :
+                          'var(--tea-green)',
                         color: 'var(--black)',
                         fontWeight: 'bold',
-                        fontSize: '1rem',
-                        height: 40,
-                        px: 2
+                        fontSize: {
+                          xs: 'clamp(0.75rem, 2.5vw, 0.875rem)',
+                          sm: 'clamp(0.875rem, 2vw, 1rem)'
+                        },
+                        height: { xs: 32, sm: 40 },
+                        px: { xs: 1, sm: 2 }
                       }}
                     />
                   </Box>
 
-                  <Grid container spacing={3}>
+                  <Grid container spacing={{ xs: 2, sm: 3 }}>
                     <Grid item xs={12} md={6}>
                       <Stack spacing={1.5}>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <Typography sx={{ color: 'var(--tea-green)', fontWeight: 'bold' }}>
+                        <Box sx={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          flexDirection: { xs: 'column', sm: 'row' },
+                          gap: { xs: 0.5, sm: 0 }
+                        }}>
+                          <Typography sx={{
+                            color: 'var(--tea-green)',
+                            fontWeight: 'bold',
+                            fontSize: {
+                              xs: 'clamp(0.75rem, 2.5vw, 0.875rem)',
+                              sm: 'clamp(0.875rem, 2vw, 1rem)'
+                            }
+                          }}>
                             Airline:
                           </Typography>
-                          <Typography sx={{ color: 'var(--tea-green)' }}>
+                          <Typography sx={{
+                            color: 'var(--tea-green)',
+                            fontSize: {
+                              xs: 'clamp(0.75rem, 2.5vw, 0.875rem)',
+                              sm: 'clamp(0.875rem, 2vw, 1rem)'
+                            }
+                          }}>
                             {flightInfo.flight.airline}
                           </Typography>
                         </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <Typography sx={{ color: 'var(--tea-green)', fontWeight: 'bold' }}>
+                        <Box sx={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          flexDirection: { xs: 'column', sm: 'row' },
+                          gap: { xs: 0.5, sm: 0 }
+                        }}>
+                          <Typography sx={{
+                            color: 'var(--tea-green)',
+                            fontWeight: 'bold',
+                            fontSize: {
+                              xs: 'clamp(0.75rem, 2.5vw, 0.875rem)',
+                              sm: 'clamp(0.875rem, 2vw, 1rem)'
+                            }
+                          }}>
                             Route:
                           </Typography>
-                          <Typography sx={{ color: 'var(--tea-green)' }}>
+                          <Typography sx={{
+                            color: 'var(--tea-green)',
+                            fontSize: {
+                              xs: 'clamp(0.75rem, 2.5vw, 0.875rem)',
+                              sm: 'clamp(0.875rem, 2vw, 1rem)'
+                            }
+                          }}>
                             {flightInfo.flight.from} → {flightInfo.flight.to}
                           </Typography>
                         </Box>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <Typography sx={{ color: 'var(--tea-green)', fontWeight: 'bold' }}>
+                        <Box sx={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          flexDirection: { xs: 'column', sm: 'row' },
+                          gap: { xs: 0.5, sm: 0 }
+                        }}>
+                          <Typography sx={{
+                            color: 'var(--tea-green)',
+                            fontWeight: 'bold',
+                            fontSize: {
+                              xs: 'clamp(0.75rem, 2.5vw, 0.875rem)',
+                              sm: 'clamp(0.875rem, 2vw, 1rem)'
+                            }
+                          }}>
                             Type:
                           </Typography>
-                          <Chip 
+                          <Chip
                             label={flightInfo.flight.flightType}
                             size="small"
-                            sx={{ 
-                              bgcolor: 'var(--mint)', 
+                            sx={{
+                              bgcolor: 'var(--mint)',
                               color: 'var(--black)',
-                              textTransform: 'capitalize'
+                              textTransform: 'capitalize',
+                              fontSize: {
+                                xs: 'clamp(0.625rem, 2vw, 0.75rem)',
+                                sm: 'clamp(0.75rem, 1.5vw, 0.875rem)'
+                              }
                             }}
                           />
                         </Box>
@@ -293,7 +397,7 @@ export default function FlightDashboard() {
                 <Divider sx={{ borderColor: 'var(--mint)', mb: 3 }} />
 
                 {/* Fellow Passengers */}
-                <Accordion elevation={2} sx={{ 
+                <Accordion elevation={2} sx={{
                   bgcolor: 'rgba(69, 183, 123, 0.1)',
                   border: '1px solid var(--mint)',
                   borderRadius: 2,
@@ -301,8 +405,8 @@ export default function FlightDashboard() {
                 }}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon sx={{ color: 'var(--mint)' }} />}
-                    sx={{ 
-                      '& .MuiAccordionSummary-content': { 
+                    sx={{
+                      '& .MuiAccordionSummary-content': {
                         alignItems: 'center',
                         justifyContent: 'space-between'
                       },
@@ -312,10 +416,10 @@ export default function FlightDashboard() {
                     <Typography variant="h6" sx={{ color: 'var(--mint)', fontWeight: 'bold' }}>
                       Fellow Passengers
                     </Typography>
-                    <Chip 
+                    <Chip
                       label={`${flightInfo.passengers.length} travelers`}
-                      sx={{ 
-                        bgcolor: 'var(--mint)', 
+                      sx={{
+                        bgcolor: 'var(--mint)',
                         color: 'var(--black)',
                         fontWeight: 'bold',
                         mr: 2
@@ -326,20 +430,20 @@ export default function FlightDashboard() {
                     <Grid container spacing={3}>
                       {flightInfo.passengers.map(({ passenger, user }) => (
                         <Grid item xs={12} sm={6} md={4} key={passenger.passengerId}>
-                          <Card elevation={passenger.userId === currentUser.userId ? 4 : 2} sx={{ 
-                            bgcolor: passenger.userId === currentUser.userId ? 
+                          <Card elevation={passenger.userId === currentUser.userId ? 4 : 2} sx={{
+                            bgcolor: passenger.userId === currentUser.userId ?
                               'rgba(132, 218, 93, 0.25)' : 'rgba(69, 183, 123, 0.15)',
-                            border: passenger.userId === currentUser.userId ? 
+                            border: passenger.userId === currentUser.userId ?
                               '2px solid var(--sgbus-green)' : '1px solid var(--mint)',
                             borderRadius: 2,
                             position: 'relative',
                             height: '100%'
                           }}>
                             {passenger.userId === currentUser.userId && (
-                              <Chip 
-                                label="YOU" 
+                              <Chip
+                                label="YOU"
                                 size="small"
-                                sx={{ 
+                                sx={{
                                   position: 'absolute',
                                   top: 12,
                                   right: 12,
@@ -352,7 +456,7 @@ export default function FlightDashboard() {
                             )}
                             <CardContent sx={{ p: 2.5, height: '100%', display: 'flex', flexDirection: 'column' }}>
                               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2.5 }}>
-                                <Avatar sx={{ 
+                                <Avatar sx={{
                                   bgcolor: getSpaceTypeColor(passenger.spaceType),
                                   color: 'var(--black)',
                                   mr: 2,
@@ -364,17 +468,17 @@ export default function FlightDashboard() {
                                   {user.name.charAt(0)}
                                 </Avatar>
                                 <Box sx={{ flex: 1 }}>
-                                  <Typography variant="subtitle1" sx={{ 
+                                  <Typography variant="subtitle1" sx={{
                                     color: 'var(--mint)',
                                     fontWeight: 'bold',
                                     mb: 0.5
                                   }}>
                                     {user.name}
                                   </Typography>
-                                  <Chip 
+                                  <Chip
                                     label={getSpaceTypeLabel(passenger.spaceType, passenger.weightKg)}
                                     size="small"
-                                    sx={{ 
+                                    sx={{
                                       bgcolor: getSpaceTypeColor(passenger.spaceType),
                                       color: 'var(--black)',
                                       fontSize: '0.75rem',

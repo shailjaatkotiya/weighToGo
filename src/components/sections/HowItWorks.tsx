@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography, Button, Grid } from '@mui/material';
+import { Box, Typography, Button, Grid, useTheme, useMediaQuery } from '@mui/material';
 
 const StepCard = ({ number, title, description, color }: {
   number: number;
@@ -9,26 +9,29 @@ const StepCard = ({ number, title, description, color }: {
 }) => (
   <Box
     sx={{
-      p: 4,
+      p: { xs: 3, sm: 4 },
       textAlign: 'center',
       borderRadius: 4,
       border: '1px solid',
       borderColor: color,
-    //   bgcolor: `${color.replace(')', ', 0.1)')}`,
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
     }}
   >
     <Box
       sx={{
-        width: 60,
-        height: 60,
+        width: { xs: 50, sm: 60 },
+        height: { xs: 50, sm: 60 },
         mx: 'auto',
-        mb: 2.5,
+        mb: { xs: 2, sm: 2.5 },
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: '50%',
         bgcolor: color,
-        fontSize: '1.5rem',
+        fontSize: { xs: '1.25rem', sm: '1.5rem' },
         color: 'var(--black)'
       }}
     >
@@ -38,14 +41,26 @@ const StepCard = ({ number, title, description, color }: {
       variant="h3"
       sx={{
         color: color,
-        mb: 2,
-        fontSize: '1.5rem',
+        mb: { xs: 1.5, sm: 2 },
+        fontSize: {
+          xs: 'clamp(1rem, 4vw, 1.25rem)',
+          sm: 'clamp(1.25rem, 3vw, 1.5rem)'
+        },
         fontWeight: 'bold'
       }}
     >
       {title}
     </Typography>
-    <Typography sx={{ color: 'var(--tea-green)' }}>
+    <Typography 
+      sx={{ 
+        color: 'var(--tea-green)',
+        fontSize: {
+          xs: 'clamp(0.75rem, 2.5vw, 0.875rem)',
+          sm: 'clamp(0.875rem, 2vw, 1rem)'
+        },
+        lineHeight: 1.6
+      }}
+    >
       {description}
     </Typography>
   </Box>
@@ -55,9 +70,9 @@ const ImageGallery = () => (
   <Box
     sx={{
       display: 'flex',
-      gap: 2.5,
+      gap: { xs: 1.5, sm: 2.5 },
       justifyContent: 'center',
-      mb: 5,
+      mb: { xs: 3, sm: 4, md: 5 },
       flexDirection: { xs: 'column', sm: 'row' },
       alignItems: 'center'
     }}
@@ -67,8 +82,8 @@ const ImageGallery = () => (
       src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
       alt="Luggage weight scale at airport"
       sx={{
-        width: 150,
-        height: 100,
+        width: { xs: 120, sm: 150 },
+        height: { xs: 80, sm: 100 },
         objectFit: 'cover',
         borderRadius: 2,
         overflow: 'hidden',
@@ -80,8 +95,8 @@ const ImageGallery = () => (
       src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
       alt="Airplane overhead luggage compartment"
       sx={{
-        width: 150,
-        height: 100,
+        width: { xs: 120, sm: 150 },
+        height: { xs: 80, sm: 100 },
         objectFit: 'cover',
         borderRadius: 2,
         overflow: 'hidden',
@@ -93,8 +108,8 @@ const ImageGallery = () => (
       src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
       alt="Happy travelers with luggage"
       sx={{
-        width: 150,
-        height: 100,
+        width: { xs: 120, sm: 150 },
+        height: { xs: 80, sm: 100 },
         objectFit: 'cover',
         borderRadius: 2,
         overflow: 'hidden',
@@ -106,6 +121,8 @@ const ImageGallery = () => (
 
 const HowItWorks = () => {
   const [selectedTab, setSelectedTab] = useState<'share' | 'find'>('share');
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const shareSteps = [
     {
@@ -155,8 +172,8 @@ const HowItWorks = () => {
       id="how-it-works"
       sx={{
         position: 'relative',
-        px: 3,
-        py: 10,
+        px: { xs: 2, sm: 3 },
+        py: { xs: 6, sm: 8, md: 10 },
         bgcolor: 'var(--black)',
         overflow: 'hidden',
         '&::before': {
@@ -182,11 +199,15 @@ const HowItWorks = () => {
         <Typography
           variant="h2"
           sx={{
-            mb: 5,
+            mb: { xs: 3, sm: 4, md: 5 },
             textAlign: 'center',
             color: 'var(--sgbus-green)',
             fontWeight: 'bold',
-            fontSize: { xs: '2rem', sm: '3rem' }
+            fontSize: {
+              xs: 'clamp(1.5rem, 6vw, 2rem)',
+              sm: 'clamp(2rem, 5vw, 2.5rem)',
+              md: 'clamp(2.5rem, 4vw, 3rem)'
+            }
           }}
         >
           How Weigh2Go Works
@@ -197,18 +218,19 @@ const HowItWorks = () => {
         <Box
           sx={{
             display: 'flex',
-            gap: 1,
+            gap: { xs: 1, sm: 2 },
             justifyContent: 'center',
-            mb: 5,
+            mb: { xs: 3, sm: 4, md: 5 },
             flexDirection: { xs: 'column', sm: 'row' },
-            alignItems: 'center'
+            alignItems: 'center',
+            px: { xs: 1, sm: 0 }
           }}
         >
           <Button
             onClick={() => setSelectedTab('share')}
             sx={{
-              px: 3,
-              py: 1.5,
+              px: { xs: 2, sm: 3 },
+              py: { xs: 1, sm: 1.5 },
               fontWeight: 600,
               borderRadius: 2,
               border: 2,
@@ -216,6 +238,8 @@ const HowItWorks = () => {
               bgcolor: selectedTab === 'share' ? 'var(--sgbus-green)' : 'transparent',
               color: selectedTab === 'share' ? 'var(--black)' : 'var(--sgbus-green)',
               transition: 'all 0.2s',
+              fontSize: { xs: '0.875rem', sm: '1rem' },
+              minHeight: { xs: '44px', sm: '48px' },
               '&:hover': {
                 bgcolor: 'var(--sgbus-green)',
                 color: 'var(--black)'
@@ -227,8 +251,8 @@ const HowItWorks = () => {
           <Button
             onClick={() => setSelectedTab('find')}
             sx={{
-              px: 3,
-              py: 1.5,
+              px: { xs: 2, sm: 3 },
+              py: { xs: 1, sm: 1.5 },
               fontWeight: 600,
               borderRadius: 2,
               border: 2,
@@ -236,6 +260,8 @@ const HowItWorks = () => {
               bgcolor: selectedTab === 'find' ? 'var(--sgbus-green)' : 'transparent',
               color: selectedTab === 'find' ? 'var(--black)' : 'var(--sgbus-green)',
               transition: 'all 0.2s',
+              fontSize: { xs: '0.875rem', sm: '1rem' },
+              minHeight: { xs: '44px', sm: '48px' },
               '&:hover': {
                 bgcolor: 'var(--sgbus-green)',
                 color: 'var(--black)'
@@ -246,9 +272,9 @@ const HowItWorks = () => {
           </Button>
         </Box>
 
-        <Grid container spacing={4} sx={{ mt: 2 }}>
+        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} sx={{ mt: 2 }}>
           {(selectedTab === 'share' ? shareSteps : findSteps).map((step) => (
-            <Grid item xs={12} md={4} key={step.number}>
+            <Grid item xs={12} sm={6} md={4} key={step.number}>
               <StepCard {...step} />
             </Grid>
           ))}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, ThemeProvider } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import Navbar from './components/Navbar';
 import LandingPage from './components/LandingPage';
 import SpaceManagement from './components/SpaceManagement';
@@ -8,6 +9,7 @@ import FlightsList from './components/FlightsList';
 import UsersList from './components/UsersList';
 import GiveSomeSpace from './components/GiveSomeSpace';
 import GetSomeSpace from './components/GetSomeSpace';
+import theme from './theme';
 import type { AppSection } from './types';
 
 function App() {  
@@ -39,15 +41,23 @@ function App() {
   };
 
   return (
-    <Box sx={{ bgcolor: 'var(--background)', minHeight: '100vh' }}>
-      <Navbar 
-        currentSection={currentSection}
-        onNavigate={handleNavigation}
-      />
-      <Box sx={{ pt: '64px' }}> {/* Add padding for fixed navbar */}
-        {renderContent()}
+    <ThemeProvider theme={theme}>
+      <Box sx={{ 
+        bgcolor: 'var(--background)', 
+        minHeight: '100vh',
+        overflowX: 'hidden'
+      }}>
+        <Navbar 
+          currentSection={currentSection}
+          onNavigate={handleNavigation}
+        />
+        <Box sx={{ 
+          pt: { xs: '56px', sm: '64px' } // Responsive padding for fixed navbar
+        }}>
+          {renderContent()}
+        </Box>
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 }
 
