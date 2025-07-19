@@ -8,7 +8,7 @@ const Footer = () => {
         px: 3,
         py: 5,
         borderTop: '1px solid',
-        borderColor: 'var(--sgbus-green)',
+        borderColor: 'var(--primary)',
         borderTopOpacity: 0.2,
       }}
     >
@@ -45,7 +45,7 @@ const Footer = () => {
           <Typography
             variant="h6"
             sx={{
-              color: 'var(--sgbus-green)',
+              color: 'var(--primary)',
               fontWeight: 'bold'
             }}
           >
@@ -56,7 +56,7 @@ const Footer = () => {
         <Typography
           sx={{
             mb: 3,
-            color: 'var(--tea-green)'
+            color: 'var(--text)'
           }}
         >
           Fly Light, Save Tight, Earn Right.

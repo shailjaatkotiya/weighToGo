@@ -9,7 +9,7 @@ const CTA = () => {
         px: 3,
         py: 10,
         textAlign: 'center',
-        bgcolor: 'var(--black)',
+        bgcolor: 'var(--background)',
         overflow: 'hidden',
         '&::before': {
           content: '""',
@@ -70,11 +70,12 @@ const CTA = () => {
               py: 2,
               fontSize: '1.125rem',
               fontWeight: 600,
-              bgcolor: 'var(--sgbus-green)',
-              color: 'var(--black)',
+              bgcolor: 'var(--primary)',
+              color: 'var(--background)',
               border: 'none',
               '&:hover': {
-                bgcolor: 'var(--mint)'
+                bgcolor: 'var(--primary)',
+                opacity: 0.8
               }
             }}
           >
@@ -88,14 +89,15 @@ const CTA = () => {
               py: 2,
               fontSize: '1.125rem',
               fontWeight: 600,
-              color: 'var(--mint)',
-              borderColor: 'var(--mint)',
+              color: 'var(--primary)',
+              borderColor: 'var(--primary)',
               borderWidth: 2,
               '&:hover': {
-                borderColor: 'var(--sgbus-green)',
-                color: 'var(--sgbus-green)',
+                borderColor: 'var(--primary)',
+                color: 'var(--primary)',
                 borderWidth: 2,
-                bgcolor: 'transparent'
+                bgcolor: 'transparent',
+                opacity: 0.8
               }
             }}
           >
