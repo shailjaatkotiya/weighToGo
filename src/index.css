@@ -3,13 +3,12 @@
   --black: #010101;
   --mint: #45B77B;
   --tea-green: #E3FFCC;
-  --white: #ffffff;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color: var(--white);
+  color: var(--tea-green);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -30,7 +29,7 @@ body {
   min-width: 90vw;
   min-height: 100vh;
   background: var(--black);
-  color: var(--white);
+  color: var(--tea-green);
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 

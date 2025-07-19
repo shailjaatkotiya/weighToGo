@@ -1,25 +1,44 @@
 import { useState } from 'react';
-import { AppBar, Toolbar, Typography, Box, Button, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, Button, Menu, MenuItem, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import type { AppSection } from '../App';
 
-export default function Navbar() {
+interface NavbarProps {
+  currentSection: AppSection;
+  onNavigate: (section: AppSection) => void;
+}
+
+export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  const handleNavigation = (section: AppSection) => {
+    onNavigate(section);
     handleClose();
   };
+
+  const navigationItems = [
+    { section: 'home' as AppSection, label: 'Home' },
+    { section: 'dashboard' as AppSection, label: 'My Dashboard' },
+    { section: 'manage-space' as AppSection, label: 'Manage Space' },
+    { section: 'find-space' as AppSection, label: 'Find Space' },
+    { section: 'offer-space' as AppSection, label: 'Offer Space' },
+    { section: 'flights' as AppSection, label: 'All Flights' },
+    { section: 'users' as AppSection, label: 'Community' }
+  ];
 
   return (
     <AppBar
       position="sticky"
       sx={{
-        // borderBottom: '1px solid',
-        // borderColor: 'var(--sgbus-green)',
         borderBottomOpacity: 0.1,
         backdropFilter: 'blur(10px)',
         bgcolor: 'rgba(1, 1, 1, 0.1)',
@@ -40,8 +59,10 @@ export default function Navbar() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            gap: 1.5
+            gap: 1.5,
+            cursor: 'pointer'
           }}
+          onClick={() => handleNavigation('home')}
         >
           <img src="/assets/logo.png" alt="Weigh2Go Logo" style={{ width: 40, height: 40 }} />
           <Typography
@@ -58,79 +79,60 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <Box
           sx={{
-            display: { xs: 'none', md: 'flex' },
-            gap: 4,
+            display: { xs: 'none', lg: 'flex' },
+            gap: 2,
             mx: 'auto',
-            '& a': {
-              color: 'var(--white)',
-              textDecoration: 'none',
-              fontWeight: 500,
-              transition: 'color 0.2s',
-              '&:hover': {
-                color: 'var(--sgbus-green)'
-              }
-            }
           }}
         >
-          <Button
-            color="inherit"
-            onClick={() => scrollToSection('how-it-works')}
-            sx={{ fontWeight: 500 }}
-          >
-            How it Works
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => scrollToSection('features')}
-            sx={{ fontWeight: 500 }}
-          >
-            Features
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => scrollToSection('pricing')}
-            sx={{ fontWeight: 500 }}
-          >
-            Pricing
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => scrollToSection('support')}
-            sx={{ fontWeight: 500 }}
-          >
-            Support
-          </Button>
+          {navigationItems.map((item) => (
+            <Button
+              key={item.section}
+              color="inherit"
+              onClick={() => handleNavigation(item.section)}
+              sx={{ 
+                fontWeight: 500,
+                color: currentSection === item.section ? 'var(--sgbus-green)' : 'var(--tea-green)',
+                borderBottom: currentSection === item.section ? '2px solid var(--sgbus-green)' : 'none',
+                borderRadius: 0,
+                '&:hover': {
+                  color: 'var(--sgbus-green)'
+                }
+              }}
+            >
+              {item.label}
+            </Button>
+          ))}
         </Box>
 
         {/* Auth Buttons and Mobile Menu */}
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-          <Button
-            variant="outlined"
-            sx={{
-              display: { xs: 'none', sm: 'inline-flex' },
-              color: 'var(--mint)',
-              borderColor: 'var(--mint)',
-              '&:hover': {
-                borderColor: 'var(--sgbus-green)',
-                color: 'var(--sgbus-green)'
-              }
+          {/* Desktop Auth Buttons */}
+          <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
+            <Button
+              variant="outlined"
+              sx={{
+                color: 'var(--mint)',
+                borderColor: 'var(--mint)',
+                '&:hover': {
+                  borderColor: 'var(--sgbus-green)',
+                  color: 'var(--sgbus-green)'
+                }
+              }}
+            >
+              Sign In
+            </Button>
+          </Box>
+
+          {/* Mobile Menu Button */}
+          <IconButton
+            sx={{ 
+              display: { xs: 'flex', lg: 'none' },
+              color: 'var(--tea-green)'
             }}
+            onClick={handleClick}
           >
-            Sign In
-          </Button>
-          <Button
-            variant="contained"
-            sx={{
-              display: { xs: 'none', sm: 'inline-flex' },
-              bgcolor: 'var(--sgbus-green)',
-              color: 'var(--black)',
-              '&:hover': {
-                bgcolor: 'var(--mint)'
-              }
-            }}
-          >
-            Get Started
-          </Button>
+            <MenuIcon />
+          </IconButton>
 
           {/* Mobile Menu */}
           <Menu
@@ -140,29 +142,38 @@ export default function Navbar() {
             sx={{
               '& .MuiPaper-root': {
                 bgcolor: 'var(--black)',
-                borderTop: '1px solid',
-                borderColor: 'var(--sgbus-green)',
-                borderTopOpacity: 0.1,
-                width: '100%',
-                maxWidth: '100%',
-                mt: 1
+                border: '1px solid var(--sgbus-green)',
+                borderRadius: 2,
+                mt: 1,
+                minWidth: 200
               }
             }}
           >
-            <MenuItem onClick={() => scrollToSection('how-it-works')}>
-              How it Works
+            {navigationItems.map((item) => (
+              <MenuItem 
+                key={item.section}
+                onClick={() => handleNavigation(item.section)}
+                sx={{
+                  color: currentSection === item.section ? 'var(--sgbus-green)' : 'var(--tea-green)',
+                  bgcolor: currentSection === item.section ? 'rgba(132, 218, 93, 0.1)' : 'transparent',
+                  '&:hover': {
+                    bgcolor: 'rgba(132, 218, 93, 0.2)',
+                    color: 'var(--sgbus-green)'
+                  }
+                }}
+              >
+                {item.label}
+              </MenuItem>
+            ))}
+            <MenuItem 
+              sx={{ 
+                color: 'var(--mint)',
+                borderTop: '1px solid var(--mint)',
+                mt: 1
+              }}
+            >
+              Sign In
             </MenuItem>
-            <MenuItem onClick={() => scrollToSection('features')}>
-              Features
-            </MenuItem>
-            <MenuItem onClick={() => scrollToSection('pricing')}>
-              Pricing
-            </MenuItem>
-            <MenuItem onClick={() => scrollToSection('support')}>
-              Support
-            </MenuItem>
-            <MenuItem>Sign In</MenuItem>
-            <MenuItem>Get Started</MenuItem>
           </Menu>
         </Box>
       </Toolbar>
