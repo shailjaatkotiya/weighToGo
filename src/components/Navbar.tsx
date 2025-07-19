@@ -38,7 +38,6 @@ export default function Navbar({ currentSection, onNavigate }: NavbarProps) {
   };
 
   const navigationItems = [
-    { section: 'home' as AppSection, label: 'Home' },
     { section: 'dashboard' as AppSection, label: 'My Dashboard' },
     { section: 'manage-space' as AppSection, label: 'Manage Space' },
     { section: 'find-space' as AppSection, label: 'Find Space' },

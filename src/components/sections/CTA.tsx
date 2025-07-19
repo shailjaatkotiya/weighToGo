@@ -20,7 +20,7 @@ const CTA = () => {
           inset: 0,
           zIndex: 0,
           opacity: 0.1,
-          backgroundImage: 'url(https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80)',
+          backgroundImage: 'url(https://t4.ftcdn.net/jpg/15/12/92/15/240_F_1512921514_3k2X4DxJz87w2dXvmRtVnnVNpC42hxe9.jpg)',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
         }

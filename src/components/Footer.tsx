@@ -9,7 +9,7 @@ const Footer = () => {
       component="footer"
       sx={{
         px: { xs: 2, sm: 3 },
-        py: { xs: 3, sm: 4, md: 5 },
+        py: { xs: 2, sm: 2.5, md: 3 },
         borderTop: '1px solid',
         borderColor: 'var(--primary)',
         borderTopOpacity: 0.2,
@@ -27,7 +27,7 @@ const Footer = () => {
             gap: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            mb: { xs: 2, sm: 3 }
+            mb: { xs: 1.5, sm: 2 }
           }}
         >
           <Box
@@ -63,7 +63,7 @@ const Footer = () => {
 
         <Typography
           sx={{
-            mb: { xs: 2, sm: 3 },
+            mb: { xs: 1.5, sm: 2 },
             color: 'var(--text)',
             fontSize: {
               xs: 'clamp(0.75rem, 2.5vw, 0.875rem)',
@@ -79,7 +79,7 @@ const Footer = () => {
             display: 'flex',
             gap: { xs: 2, sm: 3, md: 4 },
             justifyContent: 'center',
-            mb: { xs: 2, sm: 3 },
+            mb: { xs: 1.5, sm: 2 },
             flexDirection: { xs: 'column', sm: 'row' },
             alignItems: 'center',
             '& > a': {
